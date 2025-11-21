@@ -1,6 +1,6 @@
 const express = require("express") ;
 const {protect , authorize} = require("../middleware/auth") ;
-const { router } = express.Router() ;
+const router = express.Router() ;
 const { getAppointments , getAppointment , addAppointment , updateAppointment , deleteAppointment} = require("../controllers/appointments") ;
 
 router.route("/")

@@ -19,17 +19,16 @@ const sendTokenResponse = (user, statusCode, res) => {
     .status(statusCode)
     /*.cookie('token' , token , options)*/
     .json({
-      success: true,
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      token,
+      success: true ,
+      _id: user._id ,
+      name: user.name ,
+      email: user.email ,
+      token ,
     });
 };
 
-//@descn    Register user
-//@route    POST /api/v1/auth/register
-//@access   Public
+
+//Register user
 exports.register = async (req, res, next) => {
   try {
     const { name, email, password, role } = req.body;
@@ -49,6 +48,8 @@ exports.register = async (req, res, next) => {
   }
 };
 
+
+//login 
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -83,11 +84,15 @@ exports.login = async (req, res, next) => {
   }
 };
 
+
+//getme
 exports.getMe = async (req, res, next) => {
   const user = await User.findById(req.user.id);
   res.status(200).json({ success: true, data: user });
 };
 
+
+//logout
 exports.logout = async (req ,res , next) => {
     res.cookie('token' , 'none' , {
         expires : new Date(Date.now() + 10 * 1000) ,
