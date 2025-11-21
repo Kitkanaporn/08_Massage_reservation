@@ -1,4 +1,3 @@
-const { request } = require('http');
 const mongoose = require('mongoose') ;
 
 const UserSchema = new mongoose.Schema({
@@ -10,7 +9,7 @@ const UserSchema = new mongoose.Schema({
         maxlength : [100 , "user name can not be more than 100 characters" ]
     } ,
     
-    telphoneNumber : {
+    telephoneNumber : {
         type : String ,
         maxlength : [10 , 'please add user telephone can not more than 10 charecters'] ,
         required : [true , "Please add user telephone number" ],
