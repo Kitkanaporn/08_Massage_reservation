@@ -39,7 +39,18 @@ const MassageSpaSchema = new mongoose.Schema({
     region : {
         type : String ,
         required : [true , "please add spa region" ] ,
+    } ,
+
+    openTime: {
+        type: String,
+        required: [true, "Please add open time"],
+    },
+
+    closeTime: {
+        type: String,
+        required: [true, "Please add close time"],
     }
+
 } , {
     toJSON : { virtuals : true } ,
     toObject : { virtuals : true }

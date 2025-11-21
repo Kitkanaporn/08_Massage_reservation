@@ -47,7 +47,7 @@ exports.getAppointment = async (req,res,next) => {
     try {
         const appointment = await Appointment.findById(req.params.id).populate({
             path : 'massageSpa' ,
-            select : 'name description tel'
+            select : 'name description tel openTime closeTime'
         }) ;
 
         if (!appointment) {
@@ -55,13 +55,21 @@ exports.getAppointment = async (req,res,next) => {
                 success : false ,
                 message : `No appointment with the id of ${req.params.id}` 
             })
-        }else{
-            res.stratus(200).json({
-                success : true ,
-                data : appointment
+        }
+
+        // Make sure user is appointment owner or admin
+        if(appointment.user.toString() !== req.user.id && req.user.role !== 'admin') {
+            return res.status(401).json({
+                success:false , 
+                message : `User ${req.user.id} is not authorized to view this appointment`
             }) ;
         }
-    }catch (error) {
+
+        res.status(200).json({
+            success : true ,
+            data : appointment
+        }) ;
+    } catch (error) {
         console.log(error) ;
         res.status(500).json({
             success : false ,
