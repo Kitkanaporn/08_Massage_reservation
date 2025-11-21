@@ -58,12 +58,12 @@ exports.getAppointment = async (req,res,next) => {
         }
 
         // Make sure user is appointment owner or admin
-        if(appointment.user.toString() !== req.user.id && req.user.role !== 'admin') {
-            return res.status(401).json({
-                success:false , 
-                message : `User ${req.user.id} is not authorized to view this appointment`
-            }) ;
-        }
+        //if(appointment.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        //    return res.status(401).json({
+        //        success:false , 
+        //        message : `User ${req.user.id} is not authorized to view this appointment`
+        //    }) ;
+        //}
 
         res.status(200).json({
             success : true ,
