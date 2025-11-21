@@ -23,6 +23,7 @@ const sendTokenResponse = (user, statusCode, res) => {
       _id: user._id ,
       name: user.name ,
       email: user.email ,
+      telephoneNumber : user.telphoneNumber ,
       token ,
     });
 };
@@ -31,12 +32,13 @@ const sendTokenResponse = (user, statusCode, res) => {
 //Register user
 exports.register = async (req, res, next) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role , telephoneNumber } = req.body;
     const user = await User.create({
       name,
       email,
       password,
       role,
+      telephoneNumber ,
     });
     // const token = user.getSignedJwtToken() ;
     // res.status(200).json({success:true , msg:"Register user"}) ;
