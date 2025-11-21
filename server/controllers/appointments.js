@@ -1,5 +1,5 @@
 const Appointment = require('../models/Appointment') ;
-const MassageSpa = requuire('../models/MassageSpa') ;
+const MassageSpa = require('../models/MassageSpa') ;
 
 
 //Get all appointments
