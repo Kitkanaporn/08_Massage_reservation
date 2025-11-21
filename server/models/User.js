@@ -7,7 +7,13 @@ const UserSchema = new mongoose.Schema({
         required : [true , "please add user name" ] ,
         trim : true ,
         maxlength : [100 , "user name can not be more than 100 characters" ]
-    } , 
+    } ,
+    
+    telephoneNumber : {
+        type : String ,
+        maxlength : [10 , 'please add user telephone can not more than 10 charecters'] ,
+        required : [true , "Please add user telephone number" ],
+    } ,
 
     email : {
         type : String ,
