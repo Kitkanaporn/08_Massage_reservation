@@ -56,7 +56,7 @@ exports.getAppointment = async (req,res,next) => {
                 message : `No appointment with the id of ${req.params.id}` 
             })
         }else{
-            res.stratus(200).json({
+            res.status(200).json({
                 success : true ,
                 data : appointment
             }) ;
