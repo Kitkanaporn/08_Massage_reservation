@@ -33,6 +33,7 @@ const MassageSpaSchema = new mongoose.Schema({
 
     tel : {
         type : String ,
+        required : [true , "please add spa telephone number" ] ,
         maxlength : [10 , 'please add spa telephone can not more than 10 charecters']
     } ,
 

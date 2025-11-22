@@ -10,7 +10,7 @@ exports.getAppointments = async (req , res , next) => {
     if(req.user.role !== 'admin') {
         query = Appointment.find({user : req.user.id}).populate({
             path : 'massageSpa' ,
-            select : 'name province tel'
+            select : 'name address province tel openTime closeTime'
         }) ;
     } else{
         if (req.params.massageSpaID) {
@@ -19,7 +19,7 @@ exports.getAppointments = async (req , res , next) => {
         }else {
             query = Appointment.find().populate({
                 path : 'massageSpa' ,
-                select : 'name province tel'
+                select : 'name address province tel openTime closeTime'
             }) ;
         }
     } 
@@ -107,7 +107,12 @@ exports.addAppointment = async (req , res , next) => {
             }) ;
         }
 
-        const appointment = await Appointment.create(req.body) ;
+        let appointment = await Appointment.create(req.body);
+        appointment = await appointment.populate({
+        path: 'massageSpa',
+        select: 'name address province tel openTime closeTime'
+        });
+
         res.status(200).json({
             success:true , 
             data : appointment

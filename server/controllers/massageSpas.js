@@ -19,7 +19,7 @@ exports.getMassageSpas = async (req,res,next) => {
     //Create query string
     let queryStr = JSON.stringify(reqQuery) ;
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
-    query = MassageSpa.find(JSON.parse(queryStr)).populate('appointments') ;
+    query = MassageSpa.find(JSON.parse(queryStr))/*.populate(/*'appointments')*/ ;
     //console.log(req.query) ;
 
     //Select Fields
@@ -47,7 +47,7 @@ exports.getMassageSpas = async (req,res,next) => {
     query = query.skip(startIndex).limit(limit) ;
     
     //Execute query
-    const massageSpas = await query ;
+    const massageSpas = await query.select("name address province tel openTime closeTime") ;
     //console.log(req.query) ;
 
 
@@ -81,9 +81,9 @@ exports.getMassageSpas = async (req,res,next) => {
 //Get single massage-spa
 exports.getMassageSpa = async (req,res,next) => {
     try {
-        const massageSpa = await MassageSpa.findById(req.params.id) ;
+        const massageSpa = await MassageSpa.findById(req.params.id).select("name address province tel openTime closeTime") ;
         if(!massageSpa) {
-            return res.status(400).json({success:false}) ;
+            return res.status(404).json({success:false , msg : `MassageSpa not found with id of ${req.params.id}`}) ;
         }
         res.status(200).json({success:true , data : massageSpa}) ;
     } catch (err) {
