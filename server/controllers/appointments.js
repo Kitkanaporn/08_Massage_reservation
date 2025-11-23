@@ -113,7 +113,7 @@ exports.addAppointment = async (req , res , next) => {
         select: 'name address province tel openTime closeTime'
         });
 
-        res.status(200).json({
+        res.status(201).json({
             success:true , 
             data : appointment
         }) ;
